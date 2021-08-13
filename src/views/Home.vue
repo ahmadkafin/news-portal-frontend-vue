@@ -1,18 +1,24 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <Header />
+  <SecondHeader />
+  <ImageScroll />
+  <CategoryHomeSection />
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Header from "@/components/Home/content/Header";
+import SecondHeader from "@/components/Home/content/SecondHeader";
+import ImageScroll from "@/components/Home/content/ImageScroll";
+import CategoryHomeSection from "@/components/Home/content/CategoryHomeSection";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    Header,
+    SecondHeader,
+    ImageScroll,
+    CategoryHomeSection,
+  },
+};
 </script>
