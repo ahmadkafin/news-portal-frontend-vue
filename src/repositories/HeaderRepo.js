@@ -1,5 +1,5 @@
 import Client from './Clients/axiosClient';
-const resource = '/home/header';
+const resource = '/home/headline';
 
 export default {
     get() {

@@ -6,6 +6,5 @@ const baseUrl = `${baseDomain}/api`;
 export default axios.create({
     baseURL: baseUrl,
     headers: {
-
-    }
+    },
 })

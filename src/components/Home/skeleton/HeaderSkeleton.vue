@@ -59,7 +59,7 @@ export default {
   animation: pulse-bg 1s infinite;
 }
 .img-skeleton-small {
-  height: 400px;
+  height: 174px;
   background: rgb(185, 185, 185);
   animation: pulse-bg 1s infinite;
 }

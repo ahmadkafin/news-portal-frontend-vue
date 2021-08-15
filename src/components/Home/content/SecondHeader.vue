@@ -5,7 +5,8 @@
         <div class="col-lg-6 col-md-12 col-sm-12" style="padding-top: 10px;">
           <a href="javascript:void(0)">
             <span class="headertwo-title">
-              Popular News | <span class="text-capitalize"> {{ title }}</span>
+              Artikel baru
+              <span class="text-capitalize"> {{ title }}</span>
             </span>
           </a>
         </div>
@@ -49,7 +50,7 @@
         <SecondHeaderSkeleton />
       </template>
       <template v-else>
-        <div class="col-lg-8 col-md-12 col-sm-12">
+        <div class="col-lg-8 col-md-12 col-sm-12 artikel-terbaru">
           <template v-for="(item, index) in secondSect" :key="index">
             <template v-if="index <= 4">
               <div class="card float-right card-bottom my-3">
@@ -58,7 +59,7 @@
                     <div class="img-frame">
                       <img
                         class="d-block w-100"
-                        :src="'http://127.0.0.1:8000/img/artikel/' + item.image"
+                        :src="item.image"
                         :alt="item.title"
                       />
                     </div>
@@ -112,25 +113,21 @@
               >
               <div class="row">
                 <template v-for="(item, index) in random" :key="index">
-                  <template v-if="index < 2">
-                    <div
-                      class="col-lg-6 col-md-12 col-sm-12 text-truncate text-center"
-                    >
-                      <div class="rect">
-                        <img
-                          :src="
-                            'http://127.0.0.1:8000/img/artikel/' + item.image
-                          "
-                          class="img-fluid"
-                          :alt="item.title"
-                        />
-                      </div>
-                      <span
-                        class="text-muted text-truncate text-center text-sm"
-                        >{{ item.title }}</span
-                      >
+                  <div
+                    class="col-lg-6 col-md-12 col-sm-12 text-truncate text-center"
+                  >
+                    <div class="rect">
+                      <img
+                        :src="item.image"
+                        class="img-fluid"
+                        :alt="item.title"
+                      />
                     </div>
-                  </template>
+                    <span
+                      class="text-muted text-truncate text-center text-sm"
+                      >{{ item.title }}</span
+                    >
+                  </div>
                 </template>
               </div>
             </div>
@@ -155,6 +152,7 @@ export default {
   watch: {
     $route(to, from) {
       this.getSecond(this.attribute);
+      this.getRand(this.attribute);
     },
   },
   data() {
@@ -170,7 +168,7 @@ export default {
   beforeMount() {
     this.getData();
     this.getSecond(this.attribute);
-    this.getRand();
+    this.getRand(this.attribute);
   },
   methods: {
     getData: async function () {
@@ -182,8 +180,8 @@ export default {
       this.secondSect = data.data;
       this.loading = false;
     },
-    getRand: async function () {
-      const { data } = await SecondSection.getrandom();
+    getRand: async function (param) {
+      const { data } = await SecondSection.getrandom(param);
       this.random = data.data;
     },
     getParam: function (param) {
@@ -221,6 +219,22 @@ export default {
 .text-sm {
   font-size: 0.7rem;
   font-weight: 600;
+}
+
+.artikel-terbaru {
+  max-height: 577px;
+  overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.artikel-terbaru::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.artikel-terbaru {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 a.social-link {

@@ -1,24 +1,21 @@
 <template>
   <Header />
   <SecondHeader />
-  <ImageScroll />
-  <CategoryHomeSection />
+  <SectionPerCategory />
 </template>
 
 <script>
 // @ is an alias to /src
 import Header from "@/components/Home/content/Header";
 import SecondHeader from "@/components/Home/content/SecondHeader";
-import ImageScroll from "@/components/Home/content/ImageScroll";
-import CategoryHomeSection from "@/components/Home/content/CategoryHomeSection";
+import SectionPerCategory from "@/components/Home/content/SectionPerCategory";
 
 export default {
   name: "Home",
   components: {
     Header,
     SecondHeader,
-    ImageScroll,
-    CategoryHomeSection,
+    SectionPerCategory,
   },
 };
 </script>

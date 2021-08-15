@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <div class="my-3">
-      <div class="ribbon">Top Stories</div>
+      <div class="ribbon">Headline</div>
     </div>
 
     <template v-if="loadingState === true">
@@ -10,44 +10,40 @@
     <template v-else>
       <div class="row">
         <div class="col-lg-8 col-md-12 col-sm-12 mb-2">
-          <template v-for="(item, index) in header.mostview" :key="index">
-            <div class="card text-white card-big">
-              <img
-                class="card-img"
-                :src="'http://127.0.0.1:8000/img/artikel/' + item.image"
-                alt="Card image"
-              />
-              <div class="bottom-left">
-                <h5 class="card-title">
-                  <a href="javascript:void(0)" class="text-link">
-                    {{ item.title }}
-                  </a>
-                </h5>
-                <p class="card-text">Last updated 3 mins ago</p>
+          <template v-for="(item, index) in header" :key="index">
+            <template v-if="item.head_pos === 'big'">
+              <div class="card text-white card-big">
+                <img class="card-img" :src="item.image" alt="Card image" />
+                <div class="bottom-left">
+                  <h5 class="card-title">
+                    <a href="javascript:void(0)" class="text-link">
+                      {{ item.title }}
+                    </a>
+                  </h5>
+                  <p class="card-text">{{ item.created }}</p>
+                </div>
               </div>
-            </div>
+            </template>
           </template>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
           <div class="row">
-            <template v-for="(item, index) in header.mosttwo" :key="index">
-              <div class="col-lg-12 col-md-12 col-sm-12 mb-2">
-                <div class="card bg-dark text-white card-small">
-                  <img
-                    class="img-fluid"
-                    :src="'http://127.0.0.1:8000/img/artikel/' + item.image"
-                    alt="Card image"
-                  />
-                  <div class="bottom-left">
-                    <h5 class="card-title">
-                      <a href="javascript:void(0)" class="text-link">
-                        {{ item.title }}
-                      </a>
-                    </h5>
-                    <p class="card-text">Last updated 3 mins ago</p>
+            <template v-for="(item, index) in header" :key="index">
+              <template v-if="item.head_pos === 'small'">
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div class="card bg-dark text-white card-small">
+                    <img class="img-fluid" :src="item.image" alt="Card image" />
+                    <div class="bottom-left">
+                      <h5 class="card-title">
+                        <a href="javascript:void(0)" class="text-link">
+                          {{ item.title }}
+                        </a>
+                      </h5>
+                      <p class="card-text">{{ item.created }}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </template>
             </template>
           </div>
         </div>
@@ -77,8 +73,9 @@ export default {
   methods: {
     getHeader: async function () {
       const { data } = await Header.get();
-      this.header = data;
+      this.header = data.data;
       this.loadingState = false;
+      // console.log(data.data);
     },
     truncate: function (data, num) {
       const regex = /(<([^>]+)>)/gi;
